@@ -1,0 +1,25 @@
+type Robot {
+    _id: ID
+    name: String!
+    picture: String!
+    goal: String!
+    funded: Float!
+    description: String!
+    list_of_rewards: [Reward!]!
+    end_date: Int!
+    backers: [User!]!
+}
+
+type User {
+    _id: ID
+    name: String!
+    email: String!
+    fundings: [Funding!]!
+}
+
+type Reward {
+    _id: ID
+    robot_id: ID!
+    sum: Float!
+    description: String!
+}
