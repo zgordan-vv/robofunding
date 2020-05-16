@@ -34,7 +34,7 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			Path:     "/",
 			Expires:  time.Now().Add(time.Hour * 24 * 30),
 			HttpOnly: true,
-			Domain:   "127.0.0.1",
+			Domain:   "robo.app.org",
 		}
 		http.SetCookie(w, &cookie)
 	}

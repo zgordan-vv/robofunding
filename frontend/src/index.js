@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useReducer} from 'react'
+import React, {useContext, useReducer} from 'react'
 import ReactDOM from 'react-dom'
 import { ApolloProvider } from 'react-apollo'
 import Main from './components/Main'

@@ -3,7 +3,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from "apollo-link-http";
 
 const link = createHttpLink({
-    uri: 'http://127.0.0.1:4000/graphql',
+    uri: 'http://robo.app.org:4000/graphql',
     withCredentials: true
 })
 
