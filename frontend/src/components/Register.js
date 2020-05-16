@@ -11,11 +11,11 @@ const Register = props => {
     const submit = async (e) => {
         e.preventDefault()
         try {
-            await gqlClient().request(createUser, {
+            await gqlClient().mutate({mutation: createUser, variables: {
                 email,
                 password,
                 passwordConfirmation
-            })
+            }})
             setErrors([])
             props.history.push('/login')
         } catch(err) {
