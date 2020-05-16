@@ -18,7 +18,7 @@ var dbInstance *DB
 func init() {
 	db := pg.Connect(&pg.Options{
 		User:     "robouser",
-		Password: "abc12345",
+		Password: "robopwd",
 		Addr:     "localhost:5432",
 		Database: "robofunding",
 	})

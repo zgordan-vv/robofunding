@@ -3,7 +3,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from "apollo-link-http";
 
 const link = createHttpLink({
-    uri: 'http://127.0.0.1:4000/graphql',
+    uri: 'http://roboapi.empatter.com/graphql',
     withCredentials: true
 })
 
