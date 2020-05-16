@@ -1,9 +1,13 @@
-import React from 'react'
-import './styles.css'
+import React, { useContext } from 'react'
+import Context from '../context'
 
-function Main() {
+const Main = props => {
+  const { state } = useContext(Context)
+  if (!state.currentUser) {
+    props.history.push("/login")
+  }
   return (
-    <p>Main</p>
+  <p>Hello, {state.currentUser?.email}</p>
   );
 }
 
