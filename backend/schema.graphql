@@ -5,21 +5,67 @@ type Robot {
     goal: String!
     funded: Float!
     description: String!
-    list_of_rewards: [Reward!]!
+    list_of_fundings: [Funding!]!
     end_date: Int!
     backers: [User!]!
 }
 
-type User {
-    _id: ID
+type RobotInput {
     name: String!
-    email: String!
-    fundings: [Funding!]!
+    picture: String!
+    goal: String!
+    description: String!
+    end_date: Int!
 }
 
-type Reward {
+type User {
+    _id: ID
+    email: String!
+    //fundings: [Funding!]!
+}
+
+input CreateUserInput {
+    email: String!
+    password: String!
+    passwordConfirmation: String!
+}
+
+input UserLoginInput {
+    email: String!
+    password: String!
+}
+
+type Funding {
     _id: ID
     robot_id: ID!
     sum: Float!
     description: String!
+}
+
+type CreateFundingInput {
+    robot_id: ID!
+    sum: Float!
+    description: String!
+}
+
+type MakeFundingInput {
+    user_id: ID!
+    funding_id: ID!
+}
+
+type Session {
+    _id: ID!
+    user_id: ID!
+}
+
+type Query {
+    doLogin(input: UserLoginInput!): String!
+    getMe(): User!
+}
+
+type Mutation {
+    createUser(input: CreateUserInput!): User
+    //createRobot(input: RobotInput!): Robot
+    //createFunding(input: CreateFundingInput): Robot
+    //makeFunding(input: MakeFundingInput): Robot
 }

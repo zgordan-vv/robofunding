@@ -2,11 +2,15 @@ package main
 
 import (
 	"io/ioutil"
+	"net/http"
 	"os"
 
 	"github.com/go-chi/chi"
 	"github.com/graph-gophers/graphql-go"
-	"github.com/graph-gophers/graphql-go/relay"
+
+	//"github.com/graph-gophers/graphql-go/relay"
+	"github.com/zgordan-vv/robofunding/backend/auth"
+	"github.com/zgordan-vv/robofunding/backend/resolvers"
 )
 
 func main() {
@@ -16,12 +20,19 @@ func main() {
 	}
 
 	schema, err := parseSchema("./schema.graphql")
+	must(err)
+	//graphQLHandler := &relay.Handler{Schema: schema}
+	graphQLHandler := &handler{Schema: schema}
+	router := chi.NewRouter()
+	router.Use(auth.Middleware())
+	router.Handle("/graphql", graphQLHandler)
+	must(http.ListenAndServe(":"+port, router))
+}
+
+func must(err error) {
 	if err != nil {
 		panic(err)
 	}
-	graphQLHandler := &relay.Handler{Schema: schema}
-	router := chi.NewRouter()
-	router.Handle("/graphql", graphQLHandler)
 }
 
 func parseSchema(path string) (*graphql.Schema, error) {
@@ -29,9 +40,6 @@ func parseSchema(path string) (*graphql.Schema, error) {
 	if err != nil {
 		return nil, err
 	}
-	schema, err := graphql.ParseSchema(string(schemaBytes), &Resolver{})
+	schema, err := graphql.ParseSchema(string(schemaBytes), resolvers.NewResolver())
 	return schema, err
-}
-
-type Resolver struct {
 }
